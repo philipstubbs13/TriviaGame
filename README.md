@@ -1,0 +1,2 @@
+# TriviaGame
+Minnesota sports trivia
