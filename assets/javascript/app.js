@@ -11,7 +11,7 @@ var incorrectAnswersTally = 0;
 var questionSet = {
 	questionArray: [{
 		question: "Which team won the first Super Bowl (Super Bowl I)?",
-		choiceOne: "Green Bay Packers",
+		choiceAnswer: "Green Bay Packers",
 		choiceTwo: "Kansas City Chiefs",
 		choiceThree: "New England Patriots",
 		choiceFour: "Los Angeles Rams"
@@ -20,22 +20,22 @@ var questionSet = {
 		choiceOne: "Dion Lewis",
 		choiceTwo: "Julio Jones",
 		choiceThree: "Matt Ryan",
-		choiceFour: "Tom Brady"
+		choiceAnswer: "Tom Brady"
 		}, {
 		question: "What was the first team to win five Super Bowls?",
 		choiceOne: "Denver Broncos",
 		choiceTwo: "Pittsburgh Steelers",
-		choiceThree: "San Francisco 49ers",
+		choiceAnswer: "San Francisco 49ers",
 		choiceFour: "Dallas Cowboys"
 		}, {
 		question: "Which team played 4 Super Bowls, but has never led a Super Bowl for even a single second?",
 		choiceOne: "Houston Texans",
-		choiceTwo: "Minnesota Vikings",
+		choiceAnswer: "Minnesota Vikings",
 		choiceThree: "Jacksonville Jaguars",
 		choiceFour: "Chicago Bears"
 		}, {
 		question: "Who was the first African American coach to win a Super Bowl?",
-		choiceOne: "Tony Dungy",
+		choiceAnswer: "Tony Dungy",
 		choiceTwo: "Lovie Smith",
 		choiceThree: "Mike Tomlin",
 		choiceFour: "Marvin Lewis"
@@ -44,10 +44,19 @@ var questionSet = {
 		choiceOne: "Green Bay Packers",
 		choiceTwo: "New England Patriots",
 		choiceThree: "Philadelphia Eagles",
-		choiceFour: "Buffalo Bills"
+		choiceAnswer: "Buffalo Bills"
 		}]
-
 };
+
+//Create array to list correct answers to question.
+var correctAnswersArray = [questionSet.questionArray[0].choiceOne, questionSet.questionArray[1].choiceFour, questionSet.questionArray[2].choiceThree, questionSet.questionArray[3].choiceTwo, questionSet.questionArray[4].choiceOne, questionSet.questionArray[5].choiceFour];
+console.log (correctAnswersArray[0]);//Green Bay Packers
+console.log (correctAnswersArray[1]);//Tom Brady
+console.log (correctAnswersArray[2]);//San Francisco 49ers
+console.log (correctAnswersArray[3]);//Minnesota Vikings
+console.log (correctAnswersArray[4]);//Tony Dungy
+console.log (correctAnswersArray[5]);// Buffalo Bills
+
 
 
 //Append start button
@@ -69,10 +78,10 @@ function start() {
 	$("#start-div").hide();
 	//Show the question div at start of game..
 	$("#question-div").show().append("<h1>" + "Question: " + questionSet.questionArray[0].question + "</h1>");
-	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[0].choiceOne + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[0].choiceTwo + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[0].choiceThree + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[0].choiceFour + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[0].choiceAnswer + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[0].choiceTwo + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[0].choiceThree + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[0].choiceFour + "</button>" + "</h2>");
 	$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 m-3")
 
 	$("#correctAnswer").on("click", function() {
@@ -82,7 +91,15 @@ function start() {
 		$("#question-div").hide();
 		$("#correct-answer-div").show().append("<h2>" + "Correct!" + "</h2>").addClass("bg-primary text-black");
 		setTimeout(nextQuestion, 3000);
+	});
 
+	$(".wrongAnswer").on("click", function() {
+		selectRightAnswer = false;
+		//Add 1 to incorrectAnswersTally
+		incorrectAnswersTally++;
+		$("#question-div").hide();
+		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("bg-primary text-black");
+		setTimeout(thirdQuestion, 3000);
 	});
 }
 
@@ -90,9 +107,9 @@ function nextQuestion() {
 	//Show the question div at start of game..
 	$("#correct-answer-div").hide();
 	$("#question-div").show().html("<h1>" + "Question: " + questionSet.questionArray[1].question + "</h1>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[1].choiceOne + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[1].choiceTwo + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[1].choiceThree + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[1].choiceOne + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[1].choiceTwo + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[1].choiceThree + "</button>" + "</h2>");
 	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[1].choiceFour + "</button>" + "</h2>");
 	$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 m-3")
 
@@ -103,7 +120,15 @@ function nextQuestion() {
 		$("#question-div").hide();
 		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("bg-primary text-black");
 		setTimeout(thirdQuestion, 3000);
+	});
 
+	$(".wrongAnswer").on("click", function() {
+		selectRightAnswer = false;
+		//Add 1 to incorrectAnswersTally
+		incorrectAnswersTally++;
+		$("#question-div").hide();
+		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("bg-primary text-black");
+		setTimeout(thirdQuestion, 3000);
 	});
 }
 
@@ -111,10 +136,10 @@ function thirdQuestion() {
 	//Show the question div at start of game..
 	$("#correct-answer-div").hide();
 	$("#question-div").show().html("<h1>" + "Question: " + questionSet.questionArray[2].question + "</h1>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[2].choiceOne + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[2].choiceTwo + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[2].choiceThree + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[2].choiceFour + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[2].choiceOne + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[2].choiceTwo + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[2].choiceAnswer + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[2].choiceFour + "</button>" + "</h2>");
 	$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 m-3")
 
 	$("#correctAnswer").on("click", function() {
@@ -124,7 +149,15 @@ function thirdQuestion() {
 		$("#question-div").hide();
 		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("bg-primary text-black");
 		setTimeout(fourthQuestion, 3000);
+	});
 
+		$(".wrongAnswer").on("click", function() {
+		selectRightAnswer = false;
+		//Add 1 to incorrectAnswersTally
+		incorrectAnswersTally++;
+		$("#question-div").hide();
+		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("bg-primary text-black");
+		setTimeout(fourthQuestion, 3000);
 	});
 }
 
@@ -132,10 +165,10 @@ function fourthQuestion() {
 	//Show the question div at start of game..
 	$("#correct-answer-div").hide();
 	$("#question-div").show().html("<h1>" + "Question: " + questionSet.questionArray[3].question + "</h1>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[3].choiceOne + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[3].choiceTwo + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[3].choiceThree + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[3].choiceFour + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[3].choiceOne + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[3].choiceAnswer + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[3].choiceThree + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[3].choiceFour + "</button>" + "</h2>");
 	$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 m-3")
 
 	$("#correctAnswer").on("click", function() {
@@ -145,7 +178,15 @@ function fourthQuestion() {
 		$("#question-div").hide();
 		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("bg-primary text-black");
 		setTimeout(fifthQuestion, 3000);
+	});
 
+		$(".wrongAnswer").on("click", function() {
+		selectRightAnswer = false;
+		//Add 1 to incorrectAnswersTally
+		incorrectAnswersTally++;
+		$("#question-div").hide();
+		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("bg-primary text-black");
+		setTimeout(fifthQuestion, 3000);
 	});
 }
 
@@ -153,10 +194,10 @@ function fifthQuestion() {
 	//Show the question div at start of game..
 	$("#correct-answer-div").hide();
 	$("#question-div").show().html("<h1>" + "Question: " + questionSet.questionArray[4].question + "</h1>");
-	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[4].choiceOne + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[4].choiceTwo + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[4].choiceThree + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[4].choiceFour + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[4].choiceAnswer + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[4].choiceTwo + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[4].choiceThree + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[4].choiceFour + "</button>" + "</h2>");
 	$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 m-3")
 
 	$("#correctAnswer").on("click", function() {
@@ -166,17 +207,25 @@ function fifthQuestion() {
 		$("#question-div").hide();
 		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("bg-primary text-black");
 		setTimeout(sixthQuestion, 3000);
+	});
 
+	$(".wrongAnswer").on("click", function() {
+		selectRightAnswer = false;
+		//Add 1 to incorrectAnswersTally
+		incorrectAnswersTally++;
+		$("#question-div").hide();
+		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("bg-primary text-black");
+		setTimeout(sixthQuestion, 3000);
 	});
 
 function sixthQuestion() {
 	//Show the question div at start of game..
 	$("#correct-answer-div").hide();
 	$("#question-div").show().html("<h1>" + "Question: " + questionSet.questionArray[5].question + "</h1>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[5].choiceOne + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[5].choiceTwo + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[5].choiceThree + "</button>" + "</h2>");
-	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[5].choiceFour + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[5].choiceOne + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[5].choiceTwo + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice wrongAnswer'>" + questionSet.questionArray[5].choiceThree + "</button>" + "</h2>");
+	$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[5].choiceAnswer + "</button>" + "</h2>");
 	$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 m-3")
 
 	$("#correctAnswer").on("click", function() {
@@ -187,11 +236,21 @@ function sixthQuestion() {
 		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("bg-primary text-black");
 		setTimeout(gameOver, 3000);
 	});
+
+	$(".wrongAnswer").on("click", function() {
+		selectRightAnswer = false;
+		//Add 1 to incorrectAnswersTally
+		incorrectAnswersTally++;
+		$("#question-div").hide();
+		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("bg-primary text-black");
+		setTimeout(gameOver, 3000);
+	});
 }
 
 function gameOver (){
 	$("#question-div").hide();
 	$("#correct-answer-div").html("<h2>" + "You got " + correctAnswersTally + " out of 6 correct" + "</h2>").addClass("bg-primary");
+	console.log(incorrectAnswersTally);
 	//Append try again button
 	$("#correct-answer-div").append("<button id='try-again-button'>" + "Try again?" + "</button>");
 	//Add styling to start button.
