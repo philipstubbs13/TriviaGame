@@ -2,23 +2,7 @@
 	font-size: 30px;
 }
 
-#start-div {
-	margin: 0 auto;
-}
-
-#question-div {
-	margin: 0 auto;
-}
-
-#correct-answer-div {
-	margin: 0 auto;
-}
-
-#show-image {
-	margin: 0 auto;
-}
-
-#header {
+#start-div, #question-div, #correct-answer-div, #show-image, #header {
 	margin: 0 auto;
 }
 

@@ -11,7 +11,7 @@ var incorrectAnswersTally = 0;
 var count = 0;
 
 //Create array to hold images. One of the following images will be shown when user answers question correctly.
-//var imagesArray = ["../images/packers_logo.png", "../images/brady-tropy.jpg", "../images/49ers.jpg", "../images/vikings_logo.png", "../images/dungy.jpg", "../images/bills.png", "../images/ovetime.jpg", "../images/belichick.jpg", "../images/", "../images/" ]
+var imagesArray = ["packers_logo.png", "../images/brady-tropy.jpg", "../images/49ers.jpg", "../images/vikings_logo.png", "../images/dungy.jpg", "../images/bills.png", "../images/ovetime.jpg", "../images/belichick.jpg", "../images/", "../images/" ]
 
 //Create variable to hold all questions and answers in question set.
 var questionSet = {
@@ -21,21 +21,21 @@ var questionSet = {
 		choiceTwo: "Kansas City Chiefs",
 		choiceThree: "New England Patriots",
 		choiceFour: "Los Angeles Rams",
-		imageCorrect: "../images/packers_logo.png"
+		imageCorrect: "packers_logo.png"
 		}, {
 		question: "Who was awarded Super Bowl MVP in Super Bowl LI (2017)?",
 		choiceTwo: "Julio Jones",
 		choiceThree: "Matt Ryan",
 		choiceFour: "Dion Lewis",
 		choiceAnswer: "Tom Brady",
-		imageCorrect: "../images/brady-tropy.jpg"
+		imageCorrect: "images/brady-tropy.jpg"
 		}, {
 		question: "Which team was the first team to win five Super Bowls?",
 		choiceTwo: "Pittsburgh Steelers",
 		choiceThree: "Denver Broncos",
 		choiceAnswer: "San Francisco 49ers",
 		choiceFour: "Dallas Cowboys",
-		imageCorrect: "../images/49ers.jpg"
+		imageCorrect: "images/49ers.jpg"
 		}, {
 		question: "Which team played 4 Super Bowls, but has never led a Super Bowl for even a single second?",
 		choiceTwo: "Houston Texans",
@@ -134,7 +134,7 @@ function checkAnswer(){
 		$("#question-div").hide();
 		//Tell the user that his/her selection is correct.
 		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("text-center");
-		$("#show-image").html("<img src=" + questionSet.questionArray[count].imageCorrect + " width='400px'>")
+		$("#show-image").html("<img src=" + imagesArray[count] + " >");
 		//Go to the next question.
 		nextQuestion();
 		}
@@ -159,13 +159,11 @@ function nextQuestion() {
 	count++
 	 //If the count is the same as the length of the questionSet.questionArray array, game is over.
   	if (count === questionSet.questionArray.length) {
-  		$("#show-image").hide();
   		setTimeout(gameOver, 3000);
   	}
 
   	//else, go to the next question.
   	else {
-  	$("#show-image").hide();
 	setTimeout(start, 3000);
 	}
 }
@@ -175,7 +173,6 @@ function gameOver (){
 	$("#question-div").hide();
 	//Display to the user the number of questions the user got correct out of total number of questions.
 	$("#correct-answer-div").html("<h2>" + "You got " + correctAnswersTally + " out of 10 correct." + "</h2>");
-	console.log(incorrectAnswersTally);
 	//Append try again button
 	$("#correct-answer-div").append("<button id='try-again-button'>" + "Try again?" + "</button>");
 	//Add styling to reset button.
