@@ -141,7 +141,7 @@ function decrement() {
       if (Timer === 0) {
         stop();
         $("#timer-div").hide();
-        $("#time-up").show().html("<h2>" + "Time's up!" + "</h2>");
+        $("#time-up").show().html("<h2>" + "Time's up!" + "</h2>").append;
         //When timer reaches 0, hide the question and choices so that the user can't select anything when time's up.
         $("#question-div").hide();
         //Go to next question after 3 seconds.
@@ -195,12 +195,12 @@ function nextQuestion() {
 	Timer = 7;
 	 //If the count is the same as the length of the questionSet.questionArray array, wait 3 seconds and then go to game over screen to see score..
   	if (count === questionSet.questionArray.length) {
-  		setTimeout(gameOver, 3000);
+  		setTimeout(gameOver, 2000);
   	}
 
   	//else, if there are still questions left, wait three seconds and go to the next question.
   	else {
-	setTimeout(start, 3000);
+	setTimeout(start, 2000);
 	}
 }
 
