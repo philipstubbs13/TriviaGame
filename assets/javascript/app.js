@@ -117,7 +117,7 @@ function start() {
 	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[count].choiceThree + "</button>" + "</h2>");
 	$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[count].choiceFour + "</button>" + "</h2>");
 	//Add styling to the choice buttons.
-	$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 m-3")
+	$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 mb-3")
 	//When user selects a choice button, check answer. Compare the option that the user selected to the correct answer.
 	checkAnswer();
 }
@@ -133,7 +133,7 @@ function checkAnswer(){
 		correctAnswersTally++;
 		$("#question-div").hide();
 		//Tell the user that his/her selection is correct.
-		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("bg-primary text-black");
+		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("text-center");
 		$("#show-image").html("<img src=" + questionSet.questionArray[count].imageCorrect + " width='400px'>")
 		//Go to the next question.
 		nextQuestion();
@@ -147,7 +147,7 @@ function checkAnswer(){
 		$("#question-div").hide();
 		//Tell the user that his/her selection is incorrect.
 		//Do not display correct answer.
-		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("bg-primary text-black");
+		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("text-center");
 		//Go to the next question.
 		nextQuestion();
 		}
@@ -174,7 +174,7 @@ function gameOver (){
 	//Hide question-div that contains question and choices.
 	$("#question-div").hide();
 	//Display to the user the number of questions the user got correct out of total number of questions.
-	$("#correct-answer-div").html("<h2>" + "You got " + correctAnswersTally + " out of 10 correct" + "</h2>").addClass("bg-primary");
+	$("#correct-answer-div").html("<h2>" + "You got " + correctAnswersTally + " out of 10 correct." + "</h2>");
 	console.log(incorrectAnswersTally);
 	//Append try again button
 	$("#correct-answer-div").append("<button id='try-again-button'>" + "Try again?" + "</button>");
