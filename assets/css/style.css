@@ -2,7 +2,7 @@
 	font-size: 30px;
 }
 
-#start-div, #question-div, #correct-answer-div, #show-image, #header {
+#start-div, #question-div, #correct-answer-div, #show-image, #header, #timer-div, #time-up {
 	margin: 0 auto;
 }
 

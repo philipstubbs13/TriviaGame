@@ -10,6 +10,10 @@ var incorrectAnswersTally = 0;
 //Create variable to hold count that will keep track of the index of the currently displayed trivia question.
 var count = 0;
 
+//Create variable to hold the time to answer a question.
+var Timer = 7;
+var intervalId;
+
 //Create variable to hold all questions and answers in question set.
 var questionSet = {
 	questionArray: [{
@@ -102,8 +106,11 @@ $("#start-game-button").on("click", function() {
 
 //Functions
 function start() {
+	//Start timer
+	runTimer();
 	//Hide the div that contains the start button...
 	$("#start-div").hide();
+	//Hide the div that contains the start image...
 	$("#start-image").hide();
 	//Hide the div that contains the correct answer...
 	$("#correct-answer-div").hide();
@@ -119,9 +126,40 @@ function start() {
 	checkAnswer();
 }
 
+ function runTimer() {
+ 	//Set timer to decrement every 1 second...
+ 		$("#time-up").hide();
+    	intervalId = setInterval(decrement, 1000);
+    }
+
+function decrement() {
+	  //decrement timer by 1.
+      Timer--;
+      //Tell the user how much time is remaining to answer the current question.
+      $("#timer-div").show().html("<h2>" + "Time remaining: " + Timer + "</h2>");
+      //If timer reaches 0, stop timer, and tell the user that time's up.
+      if (Timer === 0) {
+        stop();
+        $("#timer-div").hide();
+        $("#time-up").show().html("<h2>" + "Time's up!" + "</h2>");
+        //When timer reaches 0, hide the question and choices so that the user can't select anything when time's up.
+        $("#question-div").hide();
+        //Go to next question after 3 seconds.
+        nextQuestion();
+      }
+}
+
+function stop() {
+	clearInterval(intervalId);
+}
+
 function checkAnswer(){
 		//When user selects an option (clicks a choice button)...
 		$(".choice").on("click", function() {
+		//Hider timer
+		stop();
+		$("#timer-div").hide();
+		$("#time-up").hide();
 		//If the id of the button that the user clicks has an id value of correctAnswer, user got question correct.
 		if (this.id === "correctAnswer") {
 		//set selectRightAnswer to true.
@@ -142,7 +180,7 @@ function checkAnswer(){
 		incorrectAnswersTally++;
 		$("#question-div").hide();
 		//Tell the user that his/her selection is incorrect and display wrong-answer.png image.
-		//Do not display correct answer.
+		//Do not display correct answer here. I don't want them to know the answer if they choose to try the game later.
 		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("text-center").append("<img src=" + "assets/images/wrong-answer.png" + " width='400px'>");
 		//Go to the next question.
 		nextQuestion();
@@ -153,6 +191,8 @@ function checkAnswer(){
 function nextQuestion() {
 	//Increment the count by 1
 	count++
+	//reset Timer
+	Timer = 7;
 	 //If the count is the same as the length of the questionSet.questionArray array, wait 3 seconds and then go to game over screen to see score..
   	if (count === questionSet.questionArray.length) {
   		setTimeout(gameOver, 3000);
@@ -165,10 +205,11 @@ function nextQuestion() {
 }
 
 function gameOver (){
+	$("#time-up").hide();
 	//Hide question-div that contains question and choices.
 	$("#question-div").hide();
 	//Display to the user the number of questions the user got correct out of total number of questions.
-	$("#correct-answer-div").html("<h2>" + "You got " + correctAnswersTally + " out of 10 correct." + "</h2>");
+	$("#correct-answer-div").show().html("<h2>" + "You got " + correctAnswersTally + " out of 10 correct." + "</h2>");
 	//Append try again button
 	$("#correct-answer-div").append("<button id='try-again-button'>" + "Try again?" + "</button>");
 	//Add styling to reset button.
@@ -179,6 +220,7 @@ function gameOver (){
 		//Hide correct-answer-div.
 		$("#correct-answer-div").hide();
 	});
+}
 
 function reset(){
 	//When game is reset (user clicks try again button), set count, correctAnswersTally, and incorrectAnswersTally back to 0 before starting game again.
@@ -188,7 +230,7 @@ function reset(){
 	start();
 }
 
-}
+
 
 
 
