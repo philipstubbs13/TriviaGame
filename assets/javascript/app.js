@@ -10,9 +10,6 @@ var incorrectAnswersTally = 0;
 //Create variable to hold count that will keep track of the index of the currently displayed trivia question.
 var count = 0;
 
-//Create array to hold images. One of the following images will be shown when user answers question correctly.
-var imagesArray = ["packers_logo.png", "../images/brady-tropy.jpg", "../images/49ers.jpg", "../images/vikings_logo.png", "../images/dungy.jpg", "../images/bills.png", "../images/ovetime.jpg", "../images/belichick.jpg", "../images/", "../images/" ]
-
 //Create variable to hold all questions and answers in question set.
 var questionSet = {
 	questionArray: [{
@@ -21,70 +18,70 @@ var questionSet = {
 		choiceTwo: "Kansas City Chiefs",
 		choiceThree: "New England Patriots",
 		choiceFour: "Los Angeles Rams",
-		imageCorrect: "packers_logo.png"
+		imageCorrect: "assets/images/packers_logo.png"
 		}, {
 		question: "Who was awarded Super Bowl MVP in Super Bowl LI (2017)?",
 		choiceTwo: "Julio Jones",
 		choiceThree: "Matt Ryan",
 		choiceFour: "Dion Lewis",
 		choiceAnswer: "Tom Brady",
-		imageCorrect: "images/brady-tropy.jpg"
+		imageCorrect: "assets/images/brady-trophy.jpg"
 		}, {
 		question: "Which team was the first team to win five Super Bowls?",
 		choiceTwo: "Pittsburgh Steelers",
 		choiceThree: "Denver Broncos",
 		choiceAnswer: "San Francisco 49ers",
 		choiceFour: "Dallas Cowboys",
-		imageCorrect: "images/49ers.jpg"
+		imageCorrect: "assets/images/49ers.jpg"
 		}, {
 		question: "Which team played 4 Super Bowls, but has never led a Super Bowl for even a single second?",
 		choiceTwo: "Houston Texans",
 		choiceAnswer: "Minnesota Vikings",
 		choiceThree: "Jacksonville Jaguars",
 		choiceFour: "Chicago Bears",
-		imageCorrect: "../images/vikings_logo.png"
+		imageCorrect: "assets/images/vikings_logo.png"
 		}, {
 		question: "Who was the first African American coach to win a Super Bowl?",
 		choiceAnswer: "Tony Dungy",
 		choiceTwo: "Lovie Smith",
 		choiceThree: "Mike Tomlin",
 		choiceFour: "Marvin Lewis",
-		imageCorrect: "../images/dungy.jpg"
+		imageCorrect: "assets/images/dungy.jpg"
 		}, {
 		question: "Which team played in the most consecutive Super Bowls?",
 		choiceFour: "Green Bay Packers",
 		choiceTwo: "New England Patriots",
 		choiceThree: "Philadelphia Eagles",
 		choiceAnswer: "Buffalo Bills",
-		imageCorrect: "../images/bills.png"
+		imageCorrect: "assets/images/bills.png"
 		}, {
 		question: "How many Super Bowls have gone into overtime?",
 		choiceFour: "0",
 		choiceTwo:  "2",
 		choiceThree: "7",
 		choiceAnswer: "1",
-		imageCorrect: "../images/ovetime.jpg"
+		imageCorrect: "assets/images/overtime.jpg"
 		}, {
 		question: "Which coach has the most Super Bowl wins?",
 		choiceFour: "Chuck Noll",
 		choiceTwo: "Tom Landry",
 		choiceThree: "Don Shula",
 		choiceAnswer: "Bill Belichick",
-		imageCorrect: "../images/belichick.jpg"
+		imageCorrect: "assets/images/belichick.jpg"
 		}, {
 		question: "Which player was the first to say 'I'm going to Disney World!'' after winning the Super Bowl?",
 		choiceFour: "Peyton Manning",
 		choiceTwo: "Tom Brady",
 		choiceThree: "Ray Lewis",
 		choiceAnswer: "Phil Simms",
-		imageCorrect: "../images/phil-sims.jpg"
+		imageCorrect: "assets/images/phil-sims.jpg"
 		}, {
 		question: "Which team has lost the most Super Bowls?",
 		choiceFour: "Seattle Seahawks",
 		choiceTwo: "Minnesota Vikings",
 		choiceThree: "New York Giants",
 		choiceAnswer: "Denver Broncos",
-		imageCorrect: "../images/broncos-lose.jpg"
+		imageCorrect: "assets/images/broncos-lose.jpg"
 		}]
 };
 
@@ -133,8 +130,7 @@ function checkAnswer(){
 		correctAnswersTally++;
 		$("#question-div").hide();
 		//Tell the user that his/her selection is correct.
-		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("text-center");
-		$("#show-image").html("<img src=" + imagesArray[count] + " >");
+		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("text-center").append("<img src=" + questionSet.questionArray[count].imageCorrect + " width='400px'>");
 		//Go to the next question.
 		nextQuestion();
 		}
@@ -145,9 +141,9 @@ function checkAnswer(){
 		//Add 1 to incorrectAnswersTally
 		incorrectAnswersTally++;
 		$("#question-div").hide();
-		//Tell the user that his/her selection is incorrect.
+		//Tell the user that his/her selection is incorrect and display wrong-answer.png image.
 		//Do not display correct answer.
-		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("text-center");
+		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("text-center").append("<img src=" + "assets/images/wrong-answer.png" + " width='400px'>");
 		//Go to the next question.
 		nextQuestion();
 		}
@@ -157,12 +153,12 @@ function checkAnswer(){
 function nextQuestion() {
 	//Increment the count by 1
 	count++
-	 //If the count is the same as the length of the questionSet.questionArray array, game is over.
+	 //If the count is the same as the length of the questionSet.questionArray array, wait 3 seconds and then go to game over screen to see score..
   	if (count === questionSet.questionArray.length) {
   		setTimeout(gameOver, 3000);
   	}
 
-  	//else, go to the next question.
+  	//else, if there are still questions left, wait three seconds and go to the next question.
   	else {
 	setTimeout(start, 3000);
 	}
