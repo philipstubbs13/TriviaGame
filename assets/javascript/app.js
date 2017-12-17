@@ -48,18 +48,32 @@ var questionSet = {
 		choiceTwo: "New England Patriots",
 		choiceThree: "Philadelphia Eagles",
 		choiceAnswer: "Buffalo Bills"
+		}, {
+		question: "How many Super Bowls have gone into overtime?",
+		choiceFour: "0",
+		choiceTwo:  "2",
+		choiceThree: "7",
+		choiceAnswer: "1"
+		}, {
+		question: "Which coach has the most Super Bowl wins?",
+		choiceFour: "Chuck Noll",
+		choiceTwo: "Tom Landry",
+		choiceThree: "Don Shula",
+		choiceAnswer: "Bill Belichick"
+		}, {
+		question: "Which player was the first to say 'I'm going to Disney World!'' after winning the Super Bowl?",
+		choiceFour: "Peyton Manning",
+		choiceTwo: "Tom Brady",
+		choiceThree: "Ray Lewis",
+		choiceAnswer: "Phil Simms"
+		}, {
+		question: "Which team has lost the most Super Bowls?",
+		choiceFour: "Seattle Seahawks",
+		choiceTwo: "Minnesota Vikings",
+		choiceThree: "New York Giants",
+		choiceAnswer: "Denver Broncos"
 		}]
 };
-
-//Create array that lists all correct answers to all questions.
-var correctAnswersArray = [questionSet.questionArray[0].choiceOne, questionSet.questionArray[1].choiceFour, questionSet.questionArray[2].choiceThree, questionSet.questionArray[3].choiceTwo, questionSet.questionArray[4].choiceOne, questionSet.questionArray[5].choiceFour];
-console.log (correctAnswersArray[0]);//Green Bay Packers
-console.log (correctAnswersArray[1]);//Tom Brady
-console.log (correctAnswersArray[2]);//San Francisco 49ers
-console.log (correctAnswersArray[3]);//Minnesota Vikings
-console.log (correctAnswersArray[4]);//Tony Dungy
-console.log (correctAnswersArray[5]);// Buffalo Bills
-
 
 //Start page with start button. Start button only shows up when user first comes to site or refreshes the browser.
 //Start button should not appear when user clicks "Try again?" when user finishes game.
@@ -128,8 +142,8 @@ function checkAnswer(){
 function nextQuestion() {
 	//Increment the count by 1
 	count++
-	 //If the count is the same as the length of the correctAnswersArray, game is over.
-  	if (count === correctAnswersArray.length) {
+	 //If the count is the same as the length of the questionSet.questionArray array, game is over.
+  	if (count === questionSet.questionArray.length) {
   		setTimeout(gameOver, 3000);
   	}
 
@@ -143,7 +157,7 @@ function gameOver (){
 	//Hide question-div that contains question and choices.
 	$("#question-div").hide();
 	//Display to the user the number of questions the user got correct out of total number of questions.
-	$("#correct-answer-div").html("<h2>" + "You got " + correctAnswersTally + " out of 6 correct" + "</h2>").addClass("bg-primary");
+	$("#correct-answer-div").html("<h2>" + "You got " + correctAnswersTally + " out of 10 correct" + "</h2>").addClass("bg-primary");
 	console.log(incorrectAnswersTally);
 	//Append try again button
 	$("#correct-answer-div").append("<button id='try-again-button'>" + "Try again?" + "</button>");
