@@ -14,105 +14,68 @@ var count = 0;
 var Timer = 7;
 var intervalId;
 
+//Create variable to hold the user's choice/anser
 var userChoice;
+
+//Create variable for button so that we can create it using jQuery.
 var choiceBtn;
 
 //Create variable to hold all questions and answers in question set.
 var questionSet = {
 	questionArray: [{
 		question: "Which team won the first Super Bowl (Super Bowl I)?",
-		//choiceAnswer: "Green Bay Packers",
-		//choiceTwo: "Kansas City Chiefs",
-		//choiceThree: "New England Patriots",
-		//choiceFour: "Los Angeles Rams",
-		answer: "Green Bay Packers",
 		choices: ["Kansas City Chiefs", "New England Patriots", "Los Angeles Rams","Green Bay Packers"],
+		answer: "Green Bay Packers",
 		imageCorrect: "assets/images/packers_logo.png"
 		}, {
 		question: "Who was awarded Super Bowl MVP in Super Bowl LI (2017)?",
-		//choiceTwo: "Julio Jones",
-		//choiceThree: "Matt Ryan",
-		//choiceFour: "Dion Lewis",
-		//choiceAnswer: "Tom Brady",
 		choices: ["Julio Jones", "Tom Brady", "Matt Ryan","James White"],
 		answer: "Tom Brady",
 		imageCorrect: "assets/images/brady-trophy.jpg"
 		}, {
 		question: "Which team was the first team to win five Super Bowls?",
-		//choiceTwo: "Pittsburgh Steelers",
-		//choiceThree: "Denver Broncos",
-		//choiceAnswer: "San Francisco 49ers",
-		//choiceFour: "Dallas Cowboys",
 		choices: ["San Francisco 49ers", "Pittsburgh Steelers", "Denver Broncos","Dallas Cowboys"],
 		answer: "San Francisco 49ers",
 		imageCorrect: "assets/images/49ers.jpg"
 		}, {
 		question: "Which team played 4 Super Bowls, but has never led a Super Bowl for even a single second?",
-		//choiceTwo: "Houston Texans",
-		//choiceAnswer: "Minnesota Vikings",
-		//choiceThree: "Jacksonville Jaguars",
-		//choiceFour: "Chicago Bears",
 		choices: ["Houston Texans", "Jacksonville Jaguars", "Minnesota Vikings","Chicago Bears"],
 		answer: "Minnesota Vikings",
 		imageCorrect: "assets/images/vikings_logo.png"
 		}, {
 		question: "Who was the first African American coach to win a Super Bowl?",
-		//choiceAnswer: "Tony Dungy",
-		//choiceTwo: "Lovie Smith",
-		//choiceThree: "Mike Tomlin",
-		//choiceFour: "Marvin Lewis",
 		choices: ["Lovie Smith", "Mike Tomlin", "Marvin Lewis","Tony Dungy"],
 		answer: "Tony Dungy",
 		imageCorrect: "assets/images/dungy.jpg"
 		}, {
 		question: "Which team played in the most consecutive Super Bowls?",
-		//choiceFour: "Green Bay Packers",
-		//choiceTwo: "New England Patriots",
-		//choiceThree: "Philadelphia Eagles",
-		//choiceAnswer: "Buffalo Bills",
 		choices: ["Green Bay Packers", "Buffalo Bills", "New England Patriots","Philadelphia Eagles"],
 		answer: "Buffalo Bills",
 		imageCorrect: "assets/images/bills.png"
 		}, {
 		question: "How many Super Bowls have gone into overtime?",
-		//choiceFour: "0",
-		//choiceTwo:  "2",
-		//choiceThree: "7",
-		//choiceAnswer: "1",
 		choices: ["0", "2", "7","1"],
 		answer: "1",
 		imageCorrect: "assets/images/overtime.jpg"
 		}, {
 		question: "Which coach has the most Super Bowl wins?",
-		//choiceFour: "Chuck Noll",
-		//choiceTwo: "Tom Landry",
-		//choiceThree: "Don Shula",
-		//choiceAnswer: "Bill Belichick",
 		choices: ["Chuck Noll", "Tom Landry", "Don Shula","Bill Belichick"],
 		answer: "Bill Belichick",
 		imageCorrect: "assets/images/belichick.jpg"
 		}, {
 		question: "Which player was the first to say 'I'm going to Disney World!'' after winning the Super Bowl?",
-		//choiceFour: "Peyton Manning",
-		//choiceTwo: "Tom Brady",
-		//choiceThree: "Ray Lewis",
-		//choiceAnswer: "Phil Simms",
 		choices: ["Peyton Manning", "Tom Brady", "Phil Simms","Brett Favre"],
 		answer: "Phil Simms",
 		imageCorrect: "assets/images/phil-sims.jpg"
 		}, {
 		question: "Which team has lost the most Super Bowls?",
-		//choiceFour: "Seattle Seahawks",
-		//choiceTwo: "Minnesota Vikings",
-		//choiceThree: "New York Giants",
-		//choiceAnswer: "Denver Broncos",
 		choices: ["Seattle Seahawks", "Denver Broncos", "New York Giants","Minnesota Vikings"],
 		answer: "Denver Broncos",
 		imageCorrect: "assets/images/broncos-lose.jpg"
 		}]
 };
 
-//Start page with start button. Start button only shows up when user first comes to site or refreshes the browser.
+//Start game page with start button. Start button only shows up when user first comes to site or refreshes the browser.
 //Start button should not appear when user clicks "Try again?" when user finishes game.
 //Append start button
 $("#start-div").append("<button id='start-game-button'>" + "Start" + "</button>");
@@ -137,27 +100,26 @@ function start() {
 	$("#start-image").hide();
 	//Hide the div that contains the correct answer...
 	$("#correct-answer-div").hide();
+	//Show the question-div at the start of the game. Display question and choices based on the current count. Count starts at 0.
 	$("#question-div").show().html("<h1>" + "Question: " + questionSet.questionArray[count].question + "</h1>");
+	//Loop through the number of choices. For each choice that the user can guess...
 	for (var i = 0; i < questionSet.questionArray[count].choices.length; i++) {
+	//Create a button (choiceBtn).
 	var choiceBtn = $("<button>");
+	//Add bootstrap styling to the button to make the button look cool.
 	choiceBtn.addClass("btn btn-primary btn-lg btn-block p-3 mb-3");
+	//Give each button a data attribute called data-choice.
 	choiceBtn.attr("data-choice", questionSet.questionArray[count].choices[i]);
+	//Then give each choiceBtn a text equal to questionSet.questionArray[count].choices[i]
 	choiceBtn.text(questionSet.questionArray[count].choices[i]);
+	//Append choiceBtn to question-div so that it appears right below the question.
 	$("#question-div").show().append(choiceBtn);
+	//When user clicks the choiceBtn, checkAnswer. Compare the option that the user selected to the correct answer.
 	choiceBtn.click(checkAnswer);
 	}
-	//Show the question-div at the start of game. Display question and choices based on the current count. Count starts at 0.
-	//$("#question-div").show().html("<h1>" + "Question: " + questionSet.questionArray[count].question + "</h1>");
-	//$("#question-div").show().append("<h2>" + "<button class='choice' id='correctAnswer'>" + questionSet.questionArray[count].choices[0] + "</button>" + "</h2>");
-	//$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[count].choices[1] + "</button>" + "</h2>");
-	//$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[count].choices[2] + "</button>" + "</h2>");
-	//$("#question-div").show().append("<h2>" + "<button class='choice'>" + questionSet.questionArray[count].choices[3] + "</button>" + "</h2>");
-	//Add styling to the choice buttons.
-	//$(".choice").addClass("btn btn-primary btn-lg btn-block p-3 mb-3")
-	//When user selects a choice button, check answer. Compare the option that the user selected to the correct answer.
 	
 }
-
+ 
  function runTimer() {
  	//Set timer to decrement every 1 second...
  		$("#time-up").hide();
@@ -186,20 +148,21 @@ function stop() {
 }
 
 function checkAnswer(){
-		//When user selects an option (clicks a choice button)...
-		//choiceBtn.on("click", function() {
+		//After user guesses/clicks a choiceBtn...
 		//Hider timer
 		stop();
 		$("#timer-div").hide();
 		$("#time-up").hide();
+		//Set the user's choice to the data-choice attribute of the choiceBtn that was clicked.
 		userChoice = $(this).attr("data-choice");
 		console.log(userChoice);
-		//If the id of the button that the user clicks has an id value of correctAnswer, user got question correct.
+		//If the user's choice equals the answer (questionSet.questionArray[count].answer)...
 		if (userChoice === questionSet.questionArray[count].answer) {
 		//set selectRightAnswer to true.
 		selectRightAnswer = true;
 		//Add 1 to correctAnswersTally
 		correctAnswersTally++;
+		//Hide question-div to hide question and choices.
 		$("#question-div").hide();
 		//Tell the user that his/her selection is correct.
 		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("text-center").append("<img src=" + questionSet.questionArray[count].imageCorrect + " width='400px'>");
@@ -219,7 +182,6 @@ function checkAnswer(){
 		//Go to the next question.
 		nextQuestion();
 		}
-	//});
 }
 
 function nextQuestion() {
