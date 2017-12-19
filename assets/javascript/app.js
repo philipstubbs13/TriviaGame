@@ -66,7 +66,7 @@ var questionSet = {
 		question: "Which player was the first to say 'I'm going to Disney World!'' after winning the Super Bowl?",
 		choices: ["Peyton Manning", "Tom Brady", "Phil Simms","Brett Favre"],
 		answer: "Phil Simms",
-		imageCorrect: "assets/images/phil-sims.jpg"
+		imageCorrect: "assets/images/disney_world.jpg"
 		}, {
 		question: "Which team has lost the most Super Bowls?",
 		choices: ["Seattle Seahawks", "Denver Broncos", "New York Giants","Minnesota Vikings"],
