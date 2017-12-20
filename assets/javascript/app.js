@@ -22,57 +22,57 @@ var choiceBtn;
 
 //Create variable to hold all questions and answers in question set.
 var questionSet = {
-	questionArray: [{
-		question: "Which team won the first Super Bowl (Super Bowl I)?",
-		choices: ["Kansas City Chiefs", "New England Patriots", "Los Angeles Rams","Green Bay Packers"],
-		answer: "Green Bay Packers",
-		imageCorrect: "assets/images/packers_logo.png"
-		}, {
-		question: "Who was awarded Super Bowl MVP in Super Bowl LI (2017)?",
-		choices: ["Julio Jones", "Tom Brady", "Matt Ryan","James White"],
-		answer: "Tom Brady",
-		imageCorrect: "assets/images/brady-trophy.jpg"
-		}, {
-		question: "Which team was the first team to win five Super Bowls?",
-		choices: ["San Francisco 49ers", "Pittsburgh Steelers", "Denver Broncos","Dallas Cowboys"],
-		answer: "San Francisco 49ers",
-		imageCorrect: "assets/images/49ers.jpg"
-		}, {
-		question: "Which team played 4 Super Bowls, but has never led a Super Bowl for even a single second?",
-		choices: ["Houston Texans", "Jacksonville Jaguars", "Minnesota Vikings","Chicago Bears"],
-		answer: "Minnesota Vikings",
-		imageCorrect: "assets/images/vikings_logo.png"
-		}, {
-		question: "Who was the first African American coach to win a Super Bowl?",
-		choices: ["Lovie Smith", "Mike Tomlin", "Marvin Lewis","Tony Dungy"],
-		answer: "Tony Dungy",
-		imageCorrect: "assets/images/dungy.jpg"
-		}, {
-		question: "Which team played in the most consecutive Super Bowls?",
-		choices: ["Green Bay Packers", "Buffalo Bills", "New England Patriots","Philadelphia Eagles"],
-		answer: "Buffalo Bills",
-		imageCorrect: "assets/images/bills.png"
-		}, {
-		question: "How many Super Bowls have gone into overtime?",
-		choices: ["0", "2", "7","1"],
-		answer: "1",
-		imageCorrect: "assets/images/overtime.jpg"
-		}, {
-		question: "Which coach has the most Super Bowl wins?",
-		choices: ["Chuck Noll", "Tom Landry", "Don Shula","Bill Belichick"],
-		answer: "Bill Belichick",
-		imageCorrect: "assets/images/belichick.jpg"
-		}, {
-		question: "Which player was the first to say 'I'm going to Disney World!'' after winning the Super Bowl?",
-		choices: ["Peyton Manning", "Tom Brady", "Phil Simms","Brett Favre"],
-		answer: "Phil Simms",
-		imageCorrect: "assets/images/disney_world.jpg"
-		}, {
-		question: "Which team has lost the most Super Bowls?",
-		choices: ["Seattle Seahawks", "Denver Broncos", "New York Giants","Minnesota Vikings"],
-		answer: "Denver Broncos",
-		imageCorrect: "assets/images/broncos-lose.jpg"
-		}]
+		questionArray: [{
+			question: "Which team won the first Super Bowl (Super Bowl I)?",
+			choices: ["Kansas City Chiefs", "New England Patriots", "Los Angeles Rams","Green Bay Packers"],
+			answer: "Green Bay Packers",
+			imageCorrect: "assets/images/packers_logo.png"
+			}, {
+			question: "Who was awarded Super Bowl MVP in Super Bowl LI (2017)?",
+			choices: ["Julio Jones", "Tom Brady", "Matt Ryan","James White"],
+			answer: "Tom Brady",
+			imageCorrect: "assets/images/brady-trophy.jpg"
+			}, {
+			question: "Which team was the first team to win five Super Bowls?",
+			choices: ["San Francisco 49ers", "Pittsburgh Steelers", "Denver Broncos","Dallas Cowboys"],
+			answer: "San Francisco 49ers",
+			imageCorrect: "assets/images/49ers.jpg"
+			}, {
+			question: "Which team played 4 Super Bowls, but has never led a Super Bowl for even a single second?",
+			choices: ["Houston Texans", "Jacksonville Jaguars", "Minnesota Vikings","Chicago Bears"],
+			answer: "Minnesota Vikings",
+			imageCorrect: "assets/images/vikings_logo.png"
+			}, {
+			question: "Who was the first African American coach to win a Super Bowl?",
+			choices: ["Lovie Smith", "Mike Tomlin", "Marvin Lewis","Tony Dungy"],
+			answer: "Tony Dungy",
+			imageCorrect: "assets/images/dungy.jpg"
+			}, {
+			question: "Which team played in the most consecutive Super Bowls?",
+			choices: ["Green Bay Packers", "Buffalo Bills", "New England Patriots","Philadelphia Eagles"],
+			answer: "Buffalo Bills",
+			imageCorrect: "assets/images/bills.png"
+			}, {
+			question: "How many Super Bowls have gone into overtime?",
+			choices: ["0", "2", "7","1"],
+			answer: "1",
+			imageCorrect: "assets/images/overtime.jpg"
+			}, {
+			question: "Which coach has the most Super Bowl wins?",
+			choices: ["Chuck Noll", "Tom Landry", "Don Shula","Bill Belichick"],
+			answer: "Bill Belichick",
+			imageCorrect: "assets/images/belichick.jpg"
+			}, {
+			question: "Which player was the first to say 'I'm going to Disney World!'' after winning the Super Bowl?",
+			choices: ["Peyton Manning", "Tom Brady", "Phil Simms","Brett Favre"],
+			answer: "Phil Simms",
+			imageCorrect: "assets/images/disney_world.jpg"
+			}, {
+			question: "Which team has lost the most Super Bowls?",
+			choices: ["Seattle Seahawks", "Denver Broncos", "New York Giants","Minnesota Vikings"],
+			answer: "Denver Broncos",
+			imageCorrect: "assets/images/broncos-lose.jpg"
+			}]
 };
 
 //Start game page with start button. Start button only shows up when user first comes to site or refreshes the browser.
@@ -104,18 +104,18 @@ function start() {
 	$("#question-div").show().html("<h1>" + "Question: " + questionSet.questionArray[count].question + "</h1>");
 	//Loop through the number of choices. For each choice that the user can guess...
 	for (var i = 0; i < questionSet.questionArray[count].choices.length; i++) {
-	//Create a button (choiceBtn).
-	var choiceBtn = $("<button>");
-	//Add bootstrap styling to the button to make the button look cool.
-	choiceBtn.addClass("btn btn-primary btn-lg btn-block p-3 mb-3");
-	//Give each button a data attribute called data-choice.
-	choiceBtn.attr("data-choice", questionSet.questionArray[count].choices[i]);
-	//Then give each choiceBtn a text equal to questionSet.questionArray[count].choices[i]
-	choiceBtn.text(questionSet.questionArray[count].choices[i]);
-	//Append choiceBtn to question-div so that it appears right below the question.
-	$("#question-div").show().append(choiceBtn);
-	//When user clicks the choiceBtn, checkAnswer. Compare the option that the user selected to the correct answer.
-	choiceBtn.click(checkAnswer);
+		//Create a button (choiceBtn).
+		var choiceBtn = $("<button>");
+		//Add bootstrap styling to the button to make the button look cool.
+		choiceBtn.addClass("btn btn-primary btn-lg btn-block p-3 mb-3");
+		//Give each button a data attribute called data-choice.
+		choiceBtn.attr("data-choice", questionSet.questionArray[count].choices[i]);
+		//Then give each choiceBtn a text equal to questionSet.questionArray[count].choices[i]
+		choiceBtn.text(questionSet.questionArray[count].choices[i]);
+		//Append choiceBtn to question-div so that it appears right below the question.
+		$("#question-div").show().append(choiceBtn);
+		//When user clicks the choiceBtn, checkAnswer. Compare the option that the user selected to the correct answer.
+		choiceBtn.click(checkAnswer);
 	}
 	
 }
@@ -158,29 +158,29 @@ function checkAnswer(){
 		console.log(userChoice);
 		//If the user's choice equals the answer (questionSet.questionArray[count].answer)...
 		if (userChoice === questionSet.questionArray[count].answer) {
-		//set selectRightAnswer to true.
-		selectRightAnswer = true;
-		//Add 1 to correctAnswersTally
-		correctAnswersTally++;
-		//Hide question-div to hide question and choices.
-		$("#question-div").hide();
-		//Tell the user that his/her selection is correct.
-		$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("text-center").append("<img src=" + questionSet.questionArray[count].imageCorrect + " width='400px'>");
-		//Go to the next question.
-		nextQuestion();
+			//set selectRightAnswer to true.
+			selectRightAnswer = true;
+			//Add 1 to correctAnswersTally
+			correctAnswersTally++;
+			//Hide question-div to hide question and choices.
+			$("#question-div").hide();
+			//Tell the user that his/her selection is correct.
+			$("#correct-answer-div").show().html("<h2>" + "Correct!" + "</h2>").addClass("text-center").append("<img src=" + questionSet.questionArray[count].imageCorrect + " width='400px'>");
+			//Go to the next question.
+			nextQuestion();
 		}
 		
 		else {
-		//Set selectRightAnswer to false if user did not pick the right option.
-		selectRightAnswer = false;
-		//Add 1 to incorrectAnswersTally
-		incorrectAnswersTally++;
-		$("#question-div").hide();
-		//Tell the user that his/her selection is incorrect and display wrong-answer.png image.
-		//Do not display correct answer here. I don't want them to know the answer if they choose to try the game later.
-		$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("text-center").append("<img src=" + "assets/images/wrong-answer.png" + " width='400px'>");
-		//Go to the next question.
-		nextQuestion();
+			//Set selectRightAnswer to false if user did not pick the right option.
+			selectRightAnswer = false;
+			//Add 1 to incorrectAnswersTally
+			incorrectAnswersTally++;
+			$("#question-div").hide();
+			//Tell the user that his/her selection is incorrect and display wrong-answer.png image.
+			//Do not display correct answer here. I don't want them to know the answer if they choose to try the game later.
+			$("#correct-answer-div").show().html("<h2>" + "Incorrect" + "</h2>").addClass("text-center").append("<img src=" + "assets/images/wrong-answer.png" + " width='400px'>");
+			//Go to the next question.
+			nextQuestion();
 		}
 }
 
@@ -196,7 +196,7 @@ function nextQuestion() {
 
   	//else, if there are still questions left, wait three seconds and go to the next question.
   	else {
-	setTimeout(start, 2000);
+		setTimeout(start, 2000);
 	}
 }
 
