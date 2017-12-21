@@ -216,7 +216,7 @@ function gameOver (){
 		$.ajax({url:queryURL,method:'GET'})
 			.done(function(response){
 				console.log(response);
-				$("#correct-answer-div").append("<img id='game-over-image' src='"+ response.data[2].images.downsized_large.url+ "'>");
+				$("#correct-answer-div").append("<img id='game-over-image' src='"+ response.data[3].images.downsized_large.url+ "'>");
 				$("#game-over-image").addClass("img-fluid");
 			})
 	}
