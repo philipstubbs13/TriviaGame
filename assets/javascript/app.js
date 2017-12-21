@@ -85,13 +85,18 @@ $("#start-game-button").addClass("btn btn-primary btn-lg btn-block");
 $("#question-div").hide();
 //Hide correct-answer-div at start of game.
 $("#corect-answer-div").hide();
-//When start button is clicked, start game.
+//Hide timer
+$("#timer-div").hide();
+//When start button is clicked, start game and show "Time remaining".
 $("#start-game-button").on("click", function() {
 	start();
+	$("#timer-div").show();
 });
 
 //Functions
 function start() {
+	//reset Timer
+	Timer = 7;
 	//Start timer
 	runTimer();
 	//Hide the div that contains the start button...
@@ -130,11 +135,14 @@ function decrement() {
 	  //decrement timer by 1.
       Timer--;
       //Tell the user how much time is remaining to answer the current question.
-      $("#timer-div").show().html("<h2>" + "Time remaining: " + Timer + "</h2>");
+      //$("#timer-div").show().html("<h2>" + "Time remaining: " + Timer + "</h2>");
+      $("#final-countdown").show().html(Timer);
       //If timer reaches 0, stop timer, and tell the user that time's up.
       if (Timer === 0) {
         stop();
+        //Hide timer.
         $("#timer-div").hide();
+        //Tell user time's up. User took too long to choose an answer.
         $("#time-up").show().html("<h2>" + "Time's up!" + "</h2>").append;
         //When timer reaches 0, hide the question and choices so that the user can't select anything when time's up.
         $("#question-div").hide();
@@ -158,6 +166,8 @@ function checkAnswer(){
 		console.log(userChoice);
 		//If the user's choice equals the answer (questionSet.questionArray[count].answer)...
 		if (userChoice === questionSet.questionArray[count].answer) {
+			//Hide timer.
+			$("#timer-div").hide();
 			//set selectRightAnswer to true.
 			selectRightAnswer = true;
 			//Add 1 to correctAnswersTally
@@ -171,6 +181,8 @@ function checkAnswer(){
 		}
 		
 		else {
+			//Hide timer.
+			$("#timer-div").hide();
 			//Set selectRightAnswer to false if user did not pick the right option.
 			selectRightAnswer = false;
 			//Add 1 to incorrectAnswersTally
@@ -187,20 +199,28 @@ function checkAnswer(){
 function nextQuestion() {
 	//Increment the count by 1
 	count++
-	//reset Timer
-	Timer = 7;
 	 //If the count is the same as the length of the questionSet.questionArray array, wait 3 seconds and then go to game over screen to see score..
   	if (count === questionSet.questionArray.length) {
+  		$("#timer-div").show();
   		setTimeout(gameOver, 2000);
   	}
 
-  	//else, if there are still questions left, wait three seconds and go to the next question.
+  	//else, if there are still questions left, wait two seconds and go to the next question.
   	else {
-		setTimeout(start, 2000);
+		setTimeout(resetTimer, 2000);
+		$("#timer-div").show();
 	}
 }
 
+function resetTimer() {
+	Timer = 7;
+	 $("#final-countdown").show().html(Timer);
+	setTimeout (start, 100);
+	}
+
 function gameOver (){
+	//Hide timer.
+	$("#timer-div").hide();
 	$("#time-up").hide();
 	//Hide question-div that contains question and choices.
 	$("#question-div").hide();
@@ -223,6 +243,8 @@ function reset(){
 	count = 0;
 	correctAnswersTally = 0;
 	incorrectAnswersTally = 0;
+	$("#timer-div").show();
+	Timer = 7;
 	start();
 }
 
