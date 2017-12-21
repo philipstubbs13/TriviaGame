@@ -3,7 +3,7 @@
 //Create a variable to hold boolean value. Did the user select the right answer (true or false)?
 var selectRightAnswer = false;
 
-//Create variables to hold number of correct answers and incorrect answers. Display numbers when game is over.
+//Create variables to hold number of correct answers and incorrect answers. Display number of questions user got right when game is over.
 var correctAnswersTally = 0;
 var incorrectAnswersTally = 0;
 
@@ -14,7 +14,7 @@ var count = 0;
 var Timer = 7;
 var intervalId;
 
-//Create variable to hold the user's choice/anser
+//Create variable to hold the user's choice/answer.
 var userChoice;
 
 //Create variable for button so that we can create it using jQuery.
@@ -26,6 +26,7 @@ var questionSet = {
 			question: "Which team won the first Super Bowl (Super Bowl I)?",
 			choices: ["Kansas City Chiefs", "New England Patriots", "Los Angeles Rams","Green Bay Packers"],
 			answer: "Green Bay Packers",
+			//Display imageCorrect image only when user gets question correct.
 			imageCorrect: "assets/images/packers_logo.png"
 			}, {
 			question: "Who was awarded Super Bowl MVP in Super Bowl LI (2017)?",
@@ -95,8 +96,6 @@ $("#start-game-button").on("click", function() {
 
 //Functions
 function start() {
-	//reset Timer
-	Timer = 7;
 	//Start timer
 	runTimer();
 	//Hide the div that contains the start button...
@@ -135,18 +134,15 @@ function decrement() {
 	  //decrement timer by 1.
       Timer--;
       //Tell the user how much time is remaining to answer the current question.
-      //$("#timer-div").show().html("<h2>" + "Time remaining: " + Timer + "</h2>");
       $("#final-countdown").show().html(Timer);
       //If timer reaches 0, stop timer, and tell the user that time's up.
       if (Timer === 0) {
         stop();
-        //Hide timer.
-        $("#timer-div").hide();
         //Tell user time's up. User took too long to choose an answer.
         $("#time-up").show().html("<h2>" + "Time's up!" + "</h2>").append;
-        //When timer reaches 0, hide the question and choices so that the user can't select anything when time's up.
+        //When timer reaches 0, hide the question and choices so that the user can't cheat and select anything when time's up.
         $("#question-div").hide();
-        //Go to next question after 3 seconds.
+        //Go to next question...
         nextQuestion();
       }
 }
@@ -157,19 +153,12 @@ function stop() {
 
 function checkAnswer(){
 		//After user guesses/clicks a choiceBtn...
-		//Hider timer
 		stop();
-		$("#timer-div").hide();
-		$("#time-up").hide();
 		//Set the user's choice to the data-choice attribute of the choiceBtn that was clicked.
 		userChoice = $(this).attr("data-choice");
 		console.log(userChoice);
 		//If the user's choice equals the answer (questionSet.questionArray[count].answer)...
 		if (userChoice === questionSet.questionArray[count].answer) {
-			//Hide timer.
-			$("#timer-div").hide();
-			//set selectRightAnswer to true.
-			selectRightAnswer = true;
 			//Add 1 to correctAnswersTally
 			correctAnswersTally++;
 			//Hide question-div to hide question and choices.
@@ -181,10 +170,6 @@ function checkAnswer(){
 		}
 		
 		else {
-			//Hide timer.
-			$("#timer-div").hide();
-			//Set selectRightAnswer to false if user did not pick the right option.
-			selectRightAnswer = false;
 			//Add 1 to incorrectAnswersTally
 			incorrectAnswersTally++;
 			$("#question-div").hide();
@@ -199,13 +184,13 @@ function checkAnswer(){
 function nextQuestion() {
 	//Increment the count by 1
 	count++
-	 //If the count is the same as the length of the questionSet.questionArray array, wait 3 seconds and then go to game over screen to see score..
+	 //If the count is the same as the length of the questionSet.questionArray array, wait 2 seconds and then go to game over screen to see score..
   	if (count === questionSet.questionArray.length) {
   		$("#timer-div").show();
   		setTimeout(gameOver, 2000);
   	}
 
-  	//else, if there are still questions left, wait two seconds and go to the next question.
+  	//else, if there are still questions left, wait two seconds, resetTimer, and go to the next question.
   	else {
 		setTimeout(resetTimer, 2000);
 		$("#timer-div").show();
@@ -213,9 +198,10 @@ function nextQuestion() {
 }
 
 function resetTimer() {
+	//After resetting timer, go to start (flip to next question).
 	Timer = 7;
 	 $("#final-countdown").show().html(Timer);
-	setTimeout (start, 100);
+	setTimeout (start, 75);
 	}
 
 function gameOver (){
