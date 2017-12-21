@@ -138,6 +138,14 @@ function decrement() {
         $("#time-up").show().html("<h2>" + "Time's up!" + "</h2>").append;
         //When timer reaches 0, hide the question and choices so that the user can't cheat and select anything when time's up.
         $("#question-div").hide();
+        //Show giph of Tom Brady.
+        var queryURL = "https://api.giphy.com/v1/gifs/search?q=tom+brady+high+five&api_key=dc6zaTOxFJmzC";
+		$.ajax({url:queryURL,method:'GET'})
+			.done(function(response){
+				console.log(response);
+				$("#time-up").append("<img id='game-over-image' src='"+ response.data[6].images.downsized_large.url+ "'>");
+				$("#game-over-image").addClass("img-fluid");
+		})
         //Go to next question...
         nextQuestion();
       }
@@ -180,15 +188,15 @@ function checkAnswer(){
 function nextQuestion() {
 	//Increment the count by 1
 	count++
-	 //If the count is the same as the length of the questionSet.questionArray array, wait 2 seconds and then go to game over screen to see score..
+	 //If the count is the same as the length of the questionSet.questionArray array, wait a few seconds and then go to game over screen to see score..
   	if (count === questionSet.questionArray.length) {
   		$("#timer-div").show();
-  		setTimeout(gameOver, 2000);
+  		setTimeout(gameOver, 4000);
   	}
 
-  	//else, if there are still questions left, wait two seconds, resetTimer, and go to the next question.
+  	//else, if there are still questions left, wait a few seconds, resetTimer, and go to the next question.
   	else {
-		setTimeout(resetTimer, 2000);
+		setTimeout(resetTimer, 4000);
 		$("#timer-div").show();
 	}
 }
