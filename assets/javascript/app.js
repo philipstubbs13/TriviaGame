@@ -11,7 +11,7 @@ var incorrectAnswersTally = 0;
 var count = 0;
 
 //Create variable to hold the time to answer a question.
-var Timer = 7;
+var Timer = 15;
 var intervalId;
 
 //Create variable to hold the user's choice/answer.
@@ -199,7 +199,7 @@ function nextQuestion() {
 
 function resetTimer() {
 	//After resetting timer, go to start (flip to next question).
-	Timer = 7;
+	Timer = 15;
 	 $("#final-countdown").show().html(Timer);
 	setTimeout (start, 75);
 	}
@@ -229,9 +229,10 @@ function reset(){
 	count = 0;
 	correctAnswersTally = 0;
 	incorrectAnswersTally = 0;
+	Timer = 15;
 	$("#timer-div").show();
-	Timer = 7;
-	start();
+	 $("#final-countdown").show().html(Timer);
+	setTimeout(start, 75);
 }
 
 
