@@ -1,8 +1,4 @@
 //Variables
-
-//Create a variable to hold boolean value. Did the user select the right answer (true or false)?
-var selectRightAnswer = false;
-
 //Create variables to hold number of correct answers and incorrect answers. Display number of questions user got right when game is over.
 var correctAnswersTally = 0;
 var incorrectAnswersTally = 0;
@@ -212,10 +208,34 @@ function gameOver (){
 	$("#question-div").hide();
 	//Display to the user the number of questions the user got correct out of total number of questions.
 	$("#correct-answer-div").show().html("<h2>" + "You got " + correctAnswersTally + " out of 10 correct." + "</h2>");
+
+	var queryURL = "https://api.giphy.com/v1/gifs/search?q=Malcolm+Butler&api_key=dc6zaTOxFJmzC";
+	console.log(queryURL);
+	//If user gets at least one wrong, show Richard Sherman reaction.
+	if (correctAnswersTally < questionSet.questionArray.length) {
+		$.ajax({url:queryURL,method:'GET'})
+			.done(function(response){
+				console.log(response);
+				$("#correct-answer-div").append("<img id='game-over-image' src='"+ response.data[2].images.downsized_large.url+ "'>");
+				$("#game-over-image").addClass("img-fluid");
+			})
+	}
+
+	//If user gets 100%, show Malcolm Butler super bowl catch.
+	if (correctAnswersTally === questionSet.questionArray.length) {
+		$.ajax({url:queryURL,method:'GET'})
+			.done(function(response){
+				console.log(response);
+				$("#correct-answer-div").append("<img id='game-over-image' src='"+ response.data[6].images.downsized_large.url+ "'>");
+				$("#game-over-image").addClass("img-fluid");
+			})
+	}
+
 	//Append try again button
 	$("#correct-answer-div").append("<button id='try-again-button'>" + "Try again?" + "</button>");
 	//Add styling to reset button.
-	$("#try-again-button").addClass("btn btn-primary btn-lg btn-block");
+	$("#try-again-button").addClass("btn btn-primary btn-lg btn-block mb-3");
+
 	//When try-again-button is clicked, reset game. Do not go to start page. User should be taken to first question in trivia game.
 	$("#try-again-button").on("click", function() {
 		reset();
