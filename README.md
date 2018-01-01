@@ -20,5 +20,7 @@
 	<li>After you go through all the questions, you will find out your score. If you want, you will have the opportunity to play again to improve that score.</li>
 </ul>
 
+## Screenshots
+<img src="assets/images/us_bank_stadium.jpg" alt="US Bank Stadium in Minneapolis, MN">
 
 
