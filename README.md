@@ -23,6 +23,12 @@
 	<li>After you go through all the questions, you will find out your score. If you want, you will have the opportunity to play again to improve that score.</li>
 </ul>
 
+## Feedback
+
+Feel free to send feedback via [Twitter](https://twitter.com/iamPhilStubbs), email (philipstubbs13@gmail.com), or [file an issue](https://github.com/philipstubbs13/TriviaGame/issues/new). Feature requests are always welcome. If you wish to contribute, please send an email with your request to philipstubbs13@gmail.com to discuss.
+
+
+
 
 
 
