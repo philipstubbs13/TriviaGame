@@ -1,7 +1,7 @@
 # TriviaGame
 
 ## Screenshot
-<img src="assets/images/trivia2.jpg" alt="Super Bowl Trivia Game">
+<img src="assets/images/trivia2.png" alt="Super Bowl Trivia Game">
 
 ## Live
 <a href="https://philipstubbs13.github.io/TriviaGame/index.html" target="_blank">https://philipstubbs13.github.io/TriviaGame/index.html</a>
