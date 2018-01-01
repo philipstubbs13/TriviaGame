@@ -1,5 +1,8 @@
 # TriviaGame
 
+## Screenshot
+<img src="assets/images/trivia2.jpg" alt="Super Bowl Trivia Game">
+
 ## Live
 <a href="https://philipstubbs13.github.io/TriviaGame/index.html" target="_blank">https://philipstubbs13.github.io/TriviaGame/index.html</a>
 
@@ -20,7 +23,6 @@
 	<li>After you go through all the questions, you will find out your score. If you want, you will have the opportunity to play again to improve that score.</li>
 </ul>
 
-## Screenshots
-<img src="assets/images/us_bank_stadium.jpg" alt="US Bank Stadium in Minneapolis, MN">
+
 
 
