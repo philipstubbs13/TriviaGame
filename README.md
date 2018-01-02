@@ -1,5 +1,8 @@
 # TriviaGame
 
+## Overview
+<p>This app is a trivia game that was created using JavaScript for the logic and jQuery to manipulate the HTML. Specifically, the trivia questions, possible answers/choices, correct answers, and images are stored in an array. A count variable was created to keep track of the index of the currently displayed trivia question. When the game starts, the count variable starts at 0. The game will display a question and the list of choices for that question based on the value of the count variable. For each question answered (or not answered), the count goes up by 1. The app also uses a timer. Specifically, it uses the setInterval method to decrement the timer every 1 second and the clearInterval method to stop the timer when it reaches 0. When the timer reaches 0, the current question and choices are hidden from the HTML, and the next question will appear after a few seconds of delay. As you go through the questions in the game, the app keeps track of the number of correct answers with the correctAnswersTally variable and the number of incorrect answers with the incorrectAnswersTally variable. If the incorrect answer is chosen, it was decided to not show the correct answer during the game. When the game is over (no more questions are left), the app displays the value of the correctAnswersTally variable to the user. A "Try again?" button is appended to the page so that the user can play again to improve upon his/her score. The app also uses Bootstrap for styling and layout.</p>
+
 ## Screenshots
 <img src="assets/images/trivia1.png" alt="Super Bowl Trivia Game start screen" width="400px" height="320px">
 <img src="assets/images/trivia2.png" alt="Super Bowl Trivia Game question screen" width="400px" height="320px">
